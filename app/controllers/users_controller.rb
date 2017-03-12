@@ -10,8 +10,15 @@ class UsersController < ApplicationController
 
   def create  #process sign up form and create new user
     @user = User.create(user_params)
-    login(@user) #log the user in
-    redirect_to @user #go to show
+    p "this is the user", @user
+    if @user.id == nil
+      flash[:error] = @user.errors.full_messages.join(", ")
+      redirect_to new_user_path
+    elsif  @user
+      login(@user) #log the user in
+      #flash[:notice] = "Successfully created new account"
+      redirect_to @user #go to show
+    end
   end
 
   def show  #show one specific user by ID

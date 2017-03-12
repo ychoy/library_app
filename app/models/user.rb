@@ -5,11 +5,12 @@ class User < ApplicationRecord
 
 	has_secure_password
 
-	validates :first_name, presence: true
-  validates :last_name, presence: true
+	validates :first_name, presence: true, length: {maximum: 50}
+  validates :last_name, presence: true, length: {maximum: 50}
   validates :email,
 		presence: true,
 		uniqueness: true,
+		length: {maximum: 250},
 		format: {
     	with: /@/,
 			message: "not a valid format"
