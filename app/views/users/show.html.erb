@@ -1,3 +1,7 @@
-<div>
-  Welcome, <%= @user.first_name %>!
+<div class="container">
+	<h3>Welcome, <strong><%= @user.first_name %>!</strong></h3>
+	<hr>
+	<p><strong>Email:</strong> <%= @user.email %></p>
+	<p class="small text-muted">Joined on <%= (@user.created_at).strftime("%m/%d/%Y") %></p>
+
 </div>
