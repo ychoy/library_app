@@ -1,7 +1,15 @@
 <div class="container">
-	<h3>Welcome, <strong><%= @user.first_name %>!</strong></h3>
-	<hr>
-	<p><strong>Email:</strong> <%= @user.email %></p>
-	<p class="small text-muted">Joined on <%= (@user.created_at).strftime("%m/%d/%Y") %></p>
-
+  <% if current_user && current_user == @user %>
+	  <h3><strong>Welcome <%= @user.first_name.capitalize %>!</strong></h3>
+    <hr>
+    <p><strong>Name:</strong> <%= @user.first_name %> <%= @user.last_name %> </p>
+    <p><strong>Email:</strong> <%= @user.email %></p>
+	  <p class="small text-muted">Joined on <%= (@user.created_at).strftime("%m/%d/%Y") %></p>
+  <% else %>
+    <h3><strong><%= @user.first_name.capitalize %>'s Profile</strong></h3>
+    <hr>
+    <p><strong>Name:</strong> <%= @user.first_name %> <%= @user.last_name %> </p>
+    <p><strong>Email:</strong> <%= @user.email %></p>
+	  <p class="small text-muted">Joined on <%= (@user.created_at).strftime("%m/%d/%Y") %></p>
+  <% end %>
 </div>

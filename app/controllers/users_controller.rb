@@ -8,14 +8,14 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
+  def create  #process sign up form and create new user
     @user = User.create(user_params)
     login(@user) #log the user in
-    redirect_to root_path #go to show
+    redirect_to @user #go to show
   end
 
-  def show
-    @user = User.find_by_id(params[:id])
+  def show  #show one specific user by ID
+    @user = User.find(params[:id])
   end
 
   private
