@@ -16,6 +16,10 @@ class UsersController < ApplicationController
 
   def show  #show one specific user by ID
     @user = User.find(params[:id])
+    if current_user != @user
+      flash[:error] = "You Cannot View This User's Profile"
+      redirect_to root_path
+    end
   end
 
   private
