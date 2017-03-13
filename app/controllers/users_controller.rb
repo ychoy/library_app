@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :set_user, except: [:index, :new, :create]
   before_filter :authorize, only: [:edit, :update]
+  before_action :require_login, only: [:show]
   def index
     @users = User.all
   end
@@ -30,6 +31,8 @@ class UsersController < ApplicationController
     if current_user != @user
       flash[:error] = "You Cannot View This User's Profile"
       redirect_to root_path
+    else
+      render :show
     end
   end
 
@@ -66,5 +69,12 @@ class UsersController < ApplicationController
     def set_user
       user_id = params[:id]
       @user = User.find_by_id(user_id)
+    end
+
+		def require_login
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
     end
 end
