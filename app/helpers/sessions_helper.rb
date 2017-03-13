@@ -16,4 +16,11 @@ module SessionsHelper
   def logout
     @current_user = session[:user_id] = nil
   end
+
+  def require_login
+    unless logged_in?
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+  end
 end

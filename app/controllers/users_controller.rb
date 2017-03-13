@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :set_user, except: [:index, :new, :create]
   before_filter :authorize, only: [:edit, :update]
-  before_action :require_login, only: [:show]
+  before_action :require_login, only: [:show, :edit, :update]
 
   def index
     @users = User.all
@@ -69,10 +69,4 @@ class UsersController < ApplicationController
       @user = User.find_by_id(user_id)
     end
 
-		def require_login
-      unless logged_in?
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
 end
