@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'users#index'
 
   resources :users, only: [:index, :new, :create, :show, :edit, :update]
-  resources :libraries, only: [:index, :new, :create, :show]
+  resources :libraries, only: [:index, :new, :create, :show, :edit, :update]
   ##########################
   # equivalent to:
   # get '/users/new', to: 'users#new', as: 'new_user'
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   # get '/libraries/new', to 'libraries#new', as: 'new_library'
   # post '/libraries', to: 'libraries#create'
   # get '/libraries/:id', to: 'libraries#show', as: 'library'
+  # post '/libraries', to: 'libraries#create'
+  # patch '/libraries/:id', to: 'libraries#update'
   ##########################
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'
