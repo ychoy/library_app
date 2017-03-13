@@ -12,7 +12,9 @@
     <p><strong>Email:</strong> <%= @user.email %></p>
 	  <p class="small text-muted">Joined on <%= (@user.created_at).strftime("%m/%d/%Y") %></p>
   <% end %>
-  <p>
-    <%= link_to "Edit Profile", edit_user_path(@user), class: "btnbtn-default" %>
+
+  <br>
+  <%= link_to "Library Membership", user_libraries_path(current_user) %> |
+  <%= link_to "Edit Profile", edit_user_path(@user) %>
   </p>
 </div>

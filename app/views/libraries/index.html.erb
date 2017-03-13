@@ -3,10 +3,12 @@
   <hr>
     <% @libraries.each do |library| %>
       <h3><%= library.name %> </h3>
-        <% if current_user %>
+      <%= link_to "View More Information", library_path(library) %>
+      <br>
+      <br>
+      <% if current_user %>
           <%= button_to "Join", library_users_path(library) %>
         <% end %>
-
       <br>
     <%end %>
 
