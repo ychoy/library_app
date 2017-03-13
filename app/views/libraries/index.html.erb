@@ -7,8 +7,12 @@
       <br>
       <br>
       <% if current_user %>
+        <% if current_user.member?(library) %>
+          <h5> You are already a member of <%= library.name %>  </h5>
+        <% else %>
           <%= button_to "Join", library_users_path(library) %>
         <% end %>
+      <% end %>
       <br>
     <%end %>
 

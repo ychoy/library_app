@@ -24,6 +24,6 @@ class User < ApplicationRecord
   end
 
   def member?(library)
-    libraries.user.include?(self)   #equivalent to: library.member?(self)
+    library.users.include?(self)   #equivalent to: library.member?(self)
   end
 end

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :set_user, except: [:index, :new, :create]
   before_filter :authorize, only: [:edit, :update]
   before_action :require_login, only: [:show]
+
   def index
     @users = User.all
   end
@@ -27,7 +28,6 @@ class UsersController < ApplicationController
 	end
 
   def show  #show one specific user by ID
-    @user = User.find(params[:id])
     if current_user != @user
       flash[:error] = "You Cannot View This User's Profile"
       redirect_to root_path
@@ -38,14 +38,12 @@ class UsersController < ApplicationController
 
 
   def edit
-    @user = User.find(params[:id])
     unless current_user == @user
       redirect_to user_path(current_user)
     end
   end
 
   def update
-    @user = User.find(params[:id])
 	  # only let current_user update their own account
   	if current_user == @user
       if @user.update_attributes(user_params)
