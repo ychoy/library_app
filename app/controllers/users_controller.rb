@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  before_filter :set_user, except: [:index, :new, :create]
+  before_filter :authorize, only: [:edit, :update]
   def index
     @users = User.all
   end
@@ -9,17 +10,20 @@ class UsersController < ApplicationController
   end
 
   def create  #process sign up form and create new user
-    @user = User.create(user_params)
-    p "this is the user", @user
-    if @user.id == nil
-      flash[:error] = @user.errors.full_messages.join(", ")
-      redirect_to new_user_path
-    elsif  @user
-      login(@user) #log the user in
-      #flash[:notice] = "Successfully created new account"
-      redirect_to @user #go to show
-    end
-  end
+    if current_user #do not let current user create new account
+			redirect_to user_path(current_user)
+		else
+			@user = User.create(user_params)
+    	if @user.id == nil
+      	flash[:error] = @user.errors.full_messages.join(", ")
+      	redirect_to new_user_path
+    	elsif  @user
+      	login(@user) #log the user in
+      	flash[:success] = "Welcome to the Library App"
+      	redirect_to @user #go to show
+    	end
+  	end
+	end
 
   def show  #show one specific user by ID
     @user = User.find(params[:id])
@@ -29,9 +33,38 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def edit
+    @user = User.find(params[:id])
+    unless current_user == @user
+      redirect_to user_path(current_user)
+    end
+  end
+
+  def update
+    @user = User.find(params[:id])
+	  # only let current_user update their own account
+  	if current_user == @user
+      if @user.update_attributes(user_params)
+        flash[:notice] = "Successfully updated profile."
+        redirect_to user_path(@user)
+      else
+        flash[:error] = @user.errors.full_messages.join(", ")
+        redirect_to edit_user_path(@user)
+      end
+    else
+      redirect_to user_path(current_user)
+    end
+  end
+
   private
 
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password)
-  end
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :email, :password)
+    end
+
+    def set_user
+      user_id = params[:id]
+      @user = User.find_by_id(user_id)
+    end
 end

@@ -15,7 +15,7 @@ class User < ApplicationRecord
     	with: /@/,
 			message: "not a valid format"
 		}
-  validates :password, length: { minimum: 6 }, on: :create  #only validate password on create
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: false
 
   def self.confirm(params)  #check if the email and password are a matching pair
     @user = User.find_by({email: params[:email]})
