@@ -7,6 +7,8 @@
 	<p class="small text-muted">Created on <%= (@library.created_at).strftime("%m/%d/%Y") %></p>
   <br>
 
-  <%= link_to "Edit Library", edit_library_path(@library), class: "btn btn-primary" %>
-  <%= link_to "Back", :back, class: "btn btn-default" %>
+  <%= link_to "Edit", edit_library_path(@library), class: "btn btn-primary" %>
+  <br>
+  <br>
+  <%= button_to "Remove", @library, method: :delete, data: {confirm: "You Sure?"}  %>
 </div>

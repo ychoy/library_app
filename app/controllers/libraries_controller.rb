@@ -37,6 +37,12 @@ class LibrariesController < ApplicationController
 		end
 	end
 
+	def destroy
+    Library.find(params[:id]).destroy
+    flash[:success] = "Library removed"
+    redirect_to libraries_path
+	end
+
   private
 
   def library_params
