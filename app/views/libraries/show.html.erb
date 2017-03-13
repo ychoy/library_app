@@ -1,0 +1,12 @@
+<div class="container">
+  <h3><strong>
+    <%= @library.name.split(" ").each{|word| word.capitalize}.join(" ") %></strong></h3>
+  <hr>
+  <p><strong>Floor Count:</strong> <%= @library.floor_count %></p>
+  <p><strong>Floor Area:</strong> <%= @library.floor_area %></p>
+	<p class="small text-muted">Created on <%= (@library.created_at).strftime("%m/%d/%Y") %></p>
+  <br>
+  <!--
+  add link_to "Edit Library", edit_library_path(@library), class: "btnbtn-default" %>
+  -->
+</div>
