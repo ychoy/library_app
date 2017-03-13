@@ -1,9 +1,10 @@
 class User < ApplicationRecord
-
-	#note: has_secure_password automatically adds validations for presence
-  # of password, password length < 72 characters, and password_confirmation
+  has_many :library_users, dependent: :destroy
+  has_many :libraries, through: :library_users
 
 	has_secure_password
+ #note: has_secure_password automatically adds validations for presence
+  # of password, password length < 72 characters, and password_confirmati
 
 	validates :first_name, presence: true, length: {maximum: 50}
   validates :last_name, presence: true, length: {maximum: 50}

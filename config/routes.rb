@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   # patch '/libraries/:id', to: 'libraries#update'
   # delete '/libraries/:id', to: 'libraries#destroy'
   ##########################
+
+  get '/users/:user_id/libraries', to: 'library_users#index', as: 'user_libraries'
+  post '/libraries/:library_id/users', to: 'library_users#create', as: 'library_users'
+
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'
   post '/sessions', to: 'sessions#create'

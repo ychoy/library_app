@@ -1,0 +1,10 @@
+<div class="container">
+
+	<h3><strong><%= @user.first_name.capitalize %></strong> is a member of the following libraries:</h3>
+  <hr>
+	<ul>
+  	<% @libraries.each do |lib| %>
+      <li><%= lib.name.capitalize %></li>
+  	<% end %>
+	</ul>
+</div>
