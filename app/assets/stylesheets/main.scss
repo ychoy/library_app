@@ -1,0 +1,16 @@
+@import "bootstrap";
+
+body {
+  background: url(https://c1.staticflickr.com/7/6148/6024485214_73b9570ae1_b.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+div.col-md-6.col-md-offset-3 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.form {
+  margin: 50px;
+  padding: 50px
+}
+
