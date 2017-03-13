@@ -4,7 +4,7 @@
   <hr>
 	<ul>
   	<% @libraries.each do |lib| %>
-      <li><%= lib.name.capitalize %></li>
+      <li><%= lib.name.split.each{|word| word.capitalize}.join(" ") %></li>
   	<% end %>
 	</ul>
 

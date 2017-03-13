@@ -1,4 +1,6 @@
 class LibrariesController < ApplicationController
+  before_action :set_library, only: [:show, :update, :destroy, :edit]
+
   def index
     @libraries = Library.all
   end
@@ -19,15 +21,15 @@ class LibrariesController < ApplicationController
   end
 
 	def show
-		@library = Library.find(params[:id])
+	#	@library = Library.find(params[:id])
 	end
 
 	def edit
-		@library = Library.find(params[:id])
+	#	@library = Library.find(params[:id])
 	end
 
 	def update
-		@library = Library.find(params[:id])
+	#	@library = Library.find(params[:id])
 		if @library.update_attributes(library_params)
 			flash[:success] = "Successfully updated library."
 			redirect_to library_path(@library)
@@ -38,11 +40,14 @@ class LibrariesController < ApplicationController
 	end
 
 	def destroy
-    Library.find(params[:id]).destroy
+  #  Library.find(params[:id]).destroy
     flash[:success] = "Library removed"
     redirect_to libraries_path
 	end
 
+  def set_library
+    @library = Library.find(params[:id])
+  end
   private
 
   def library_params

@@ -22,4 +22,8 @@ class User < ApplicationRecord
     @user = User.find_by({email: params[:email]})
     @user ? @user.authenticate(params[:password]) : false
   end
+
+  def member?(library)
+    libraries.user.include?(self)   #equivalent to: library.member?(self)
+  end
 end

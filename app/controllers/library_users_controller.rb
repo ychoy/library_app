@@ -6,7 +6,7 @@ class LibraryUsersController < ApplicationController
 
 	def create
     @library = Library.find(params[:library_id])
-    @library.users.push(current_user)  #TODO: error handling
+    @library.users.push(current_user) unless @library.member?(current_user)
 
     redirect_to current_user
   end
